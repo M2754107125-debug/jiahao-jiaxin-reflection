@@ -27,7 +27,7 @@ try {
   assert.equal(await page.locator('[data-day]').count(),14);
   assert.equal(await page.evaluate(()=>localStorage.length),0);
   await page.reload(); await page.locator('.score-number').waitFor();
-  const dl=page.waitForEvent('download'); await page.locator('[data-action="download"]').click(); assert.ok((await dl).suggestedFilename());
+  const [dl]=await Promise.all([page.waitForEvent('download'),page.locator('[data-action="download"]').first().click()]); assert.ok(dl.suggestedFilename());
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'horizontal overflow');
   assert.ok(requests.every(u=>new URL(u).origin===new URL(base).origin),'external network request');
   assert.deepEqual(errors,[]);
