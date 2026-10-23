@@ -31,3 +31,9 @@ node test-regression.mjs
 浏览器验收使用真实页面输入完成六类50题，得到0分及五项0分；在约390像素手机预览下检查首页、答题页和报告。未验证中国大陆所有网络的无VPN可达性。
 
 GitHub Pages 发布源：`main` 根目录；`.nojekyll` 禁用 Jekyll 转换。未修改原 Sites 项目或权限。
+
+## 可迁移发布包与大陆分发
+
+构建 `python3 scripts/build.py`，校验 `python3 scripts/test-release.py`，上传生成的 `dist/` 内全部文件。构建只改资源引用与加载提示，保留现有题目、计分及存储行为。发布模块使用 `.js` 和内容哈希文件名，兼容根目录和子目录托管。
+
+部署条件、费用、缓存/MIME配置、回滚与真实大陆网络验收见 [迁移部署说明](deployment/DEPLOYMENT.md)。目前未完成新平台部署或大陆真机验收，不能承诺全网直连。浏览器测试脚本与 CI 已提供，其运行状态以实际日志为准。
